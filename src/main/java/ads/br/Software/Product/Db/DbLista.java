@@ -13,7 +13,9 @@ public class DbLista {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",unique = true)
     private Long id;
-    @Column(name = "nomeDaSuaLista",unique = true,nullable = false)
+    @Column(name = "idDbNomeLista")
+    private Long idDbNomeLista;
+    @Column(name = "nomeDaSuaLista",nullable = false)
     private String nomeDaSuaLista;
     @Column(name = "itemLista")
     private String itemLista;

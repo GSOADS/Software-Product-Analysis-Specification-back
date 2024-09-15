@@ -5,12 +5,14 @@ import ads.br.Software.Product.repository.DbDonoDaListaRepository;
 import ads.br.Software.Product.Db.DbNomeDaLista;
 import ads.br.Software.Product.repository.DbListaRepository;
 import ads.br.Software.Product.request.Request;
+import ads.br.Software.Product.service.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @RestController
 @RequestMapping("/produtos")
 public class Teste {
@@ -18,10 +20,18 @@ public class Teste {
     private DbDonoDaListaRepository dbDonoDaListaRepository;
     @Autowired
     private DbListaRepository dbListaRepository;
+    @Autowired
+    private Services services;
 
     @GetMapping
     public List<DbNomeDaLista> listarProdutos() {
-        System.out.println(dbDonoDaListaRepository.getById(3L));
+        System.out.println(dbDonoDaListaRepository.getById(1L));
+        System.out.println(dbDonoDaListaRepository.findBynomeDaSuaLista("Lista de presente do Gabriel"));
+        if (dbDonoDaListaRepository.findBynomeDaSuaLista("Lista de presente do Gabriel").isEmpty())
+        {
+
+        }
+
 //        System.out.println(listRepository.findAll());
         return dbDonoDaListaRepository.findAll();
     }
@@ -53,9 +63,37 @@ public class Teste {
     @PostMapping("/nome_lista")
     public ResponseEntity dados(@RequestHeader String headerLista, @RequestBody Request request)
     {
-        if (headerLista.equals("Dado")) {
-            System.out.println(request.getDbLista());
-            System.out.println(request.getDbNomeDaLista());
+        if (headerLista.equals("Dado"))
+        {
+            services.create(request);
+
+//            System.out.println(request.getDbLista());
+//            System.out.println(request.getDbNomeDaLista());
+//            System.out.println(request.getDbNomeDaLista().getNomeDaSuaLista());
+//            Optional<DbNomeDaLista> dbNomeDaLista1 = dbDonoDaListaRepository.findBynomeDaSuaLista(request.getDbNomeDaLista().getNomeDaSuaLista());
+//            System.out.println(dbNomeDaLista1);
+//            System.out.println("tamanho da lista " + request.getDbLista().size());
+//
+//            System.out.println("tamanho da lista elemento "+ request.getDbLista().get(0));
+//            System.out.println("tamanho da lista elemento" + request.getDbLista().get(1));
+//
+//            for (int i = 0; i < request.getDbLista().size(); i++)
+//            {
+//                System.out.println("tamanho da lista elemento" + request.getDbLista().get(i));
+//
+//            }
+//
+//
+//            System.out.println("tamanho da lista " + request.getDbLista().size());
+//
+//            DbNomeDaLista dbNomeDaLista = dbDonoDaListaRepository.findbynome(request.getDbNomeDaLista().getNomeDaSuaLista());
+//            System.out.println("SERA QUE VAI AGORA "+ dbNomeDaLista.getNomeDaSuaLista());
+//
+//            System.out.println("sou o ultimo "+dbDonoDaListaRepository.findbynome(request.getDbNomeDaLista().getNomeDaSuaLista()));
+
+
+//            String receive =  (dbDonoDaListaRepository.findBynomeDaSuaLista(request.getDbNomeDaLista().getNomeDaSuaLista()));
+//            System.out.println( "ESTOU" + receive);
         }
 
         return null;

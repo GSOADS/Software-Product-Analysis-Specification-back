@@ -11,4 +11,8 @@ import java.util.List;
 public class Request {
     private DbNomeDaLista dbNomeDaLista;
     private List<DbLista> dbLista;
+    private DbNomeDaLista delvolveDbNomeDaLista = new DbNomeDaLista();
+    private DbLista delvolveDbLista = new DbLista();
+
+
 }
