@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/produtos")
 public class Teste {
@@ -60,11 +60,15 @@ public class Teste {
         }
         return null;
     }
+
+
+
     @PostMapping("/nome_lista")
     public ResponseEntity dados(@RequestHeader String headerLista, @RequestBody Request request)
     {
         if (headerLista.equals("Dado"))
         {
+            System.out.println("dentro da lista "+ "request.getDbLista().get(0)" +"+" + request.getDbNomeDaLista().getNomeDaSuaLista());
             services.create(request);
 
 //            System.out.println(request.getDbLista());
