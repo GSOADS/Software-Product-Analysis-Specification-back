@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/lista")
 public class Teste {
     @Autowired
     private DbDonoDaListaRepository dbDonoDaListaRepository;
@@ -63,8 +63,8 @@ public class Teste {
 
 
 
-    @PostMapping("/nome_lista")
-    public ResponseEntity dados(@RequestHeader String headerLista, @RequestBody Request request)
+    @PostMapping("/criar")
+    public ResponseEntity criarLista(@RequestHeader String headerLista, @RequestBody Request request)
     {
         if (headerLista.equals("Dado"))
         {
