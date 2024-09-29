@@ -1,12 +1,16 @@
 package ads.br.Software.Product.service;
 
+import ads.br.Software.Product.Db.DbLista;
 import ads.br.Software.Product.Db.DbNomeDaLista;
 import ads.br.Software.Product.repository.DbDonoDaListaRepository;
 import ads.br.Software.Product.repository.DbListaRepository;
 import ads.br.Software.Product.request.Request;
+import ads.br.Software.Product.response.Response;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Data
@@ -22,7 +26,9 @@ public class Services {
     private DbDonoDaListaRepository dbDonoDaListaRepository;
 
 
+    private Response response = new Response();
     private DbNomeDaLista dbNomeDaLista = new DbNomeDaLista();
+    private List<DbLista> dbListas;
 
     public void create(Request request)
     {
@@ -42,26 +48,51 @@ public class Services {
 //            System.out.println("tamanho da lista elemento "+ request.getDbLista().get(0));
 //            System.out.println("tamanho da lista elemento" + request.getDbLista().get(1));
 
-        }catch (Exception e)
-    {
-        dbNomeDaLista = dbDonoDaListaRepository.save(request.getDbNomeDaLista());
-        for (int i = 0; i < request.getDbLista().size(); i++)
+        }
+        catch (Exception e)
         {
-            request.getDbLista().get(i).setIdDbNomeLista(dbNomeDaLista.getId());
-            request.getDbLista().get(i).setNomeDaSuaLista(dbNomeDaLista.getNomeDaSuaLista());
-            System.out.println("o que tem dentro " + request.getDbLista().get(i));
-            dbListaRepository.save(request.getDbLista().get(i));
+            dbNomeDaLista = dbDonoDaListaRepository.save(request.getDbNomeDaLista());
+            for (int i = 0; i < request.getDbLista().size(); i++)
+            {
+                request.getDbLista().get(i).setIdDbNomeLista(dbNomeDaLista.getId());
+                request.getDbLista().get(i).setNomeDaSuaLista(dbNomeDaLista.getNomeDaSuaLista());
+                System.out.println("o que tem dentro " + request.getDbLista().get(i));
+                dbListaRepository.save(request.getDbLista().get(i));
+
+            }
+
+            System.out.println("Deu bom");
 
         }
 
-        System.out.println("Deu bom");
+    }
 
+    public Response obterNomeELista(String nomeDaLista)
+    {
+
+        try
+        {
+            dbNomeDaLista = dbDonoDaListaRepository.findbynome(nomeDaLista);
+            dbListas=dbListaRepository.findbynomeDaSuaLista(dbNomeDaLista.getNomeDaSuaLista());
+            response.setDbNomeDaLista(dbNomeDaLista);
+            response.setDbLista(dbListas);
+
+            return response;
+
+
+
+        }catch (Exception e)
+
+        {
+
+        }
+
+
+        return null;
     }
 
 
 
-
-    }
 
 
 }

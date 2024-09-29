@@ -5,6 +5,7 @@ import ads.br.Software.Product.repository.DbDonoDaListaRepository;
 import ads.br.Software.Product.Db.DbNomeDaLista;
 import ads.br.Software.Product.repository.DbListaRepository;
 import ads.br.Software.Product.request.Request;
+import ads.br.Software.Product.response.Response;
 import ads.br.Software.Product.service.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -101,6 +102,18 @@ public class Teste {
         }
 
         return null;
+    }
+
+    @GetMapping("/obterListaEItens/{nomeDaLista}")
+    public ResponseEntity <Response> obterListaEItens(@PathVariable String nomeDaLista)
+    {
+        System.out.println("nome da lista"+ nomeDaLista);
+
+        Response response = services.obterNomeELista(nomeDaLista);
+        System.out.println(response);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+
     }
 
     @GetMapping("/db")
