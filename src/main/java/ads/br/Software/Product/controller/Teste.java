@@ -116,6 +116,13 @@ public class Teste {
 
     }
 
+    @PutMapping("/alterarListaItens")
+    public void alterarListaItens(@RequestBody Request request)
+    {
+        System.out.println("FUNÇÂO PUT "+request.getDbLista());
+
+    }
+
     @GetMapping("/db")
     public ResponseEntity<String> verificarStatusDB() {
         try {
