@@ -15,7 +15,7 @@ public class DbLista {
     private Long id;
     @Column(name = "idDbNomeLista")
     private Long idDbNomeLista;
-    @Column(name = "nomeDaSuaLista",nullable = false)
+    @Column(name = "nomeDaSuaLista", nullable = false, columnDefinition = "VARCHAR(255)")
     private String nomeDaSuaLista;
     @Column(name = "itemLista")
     private String itemLista;

@@ -120,6 +120,8 @@ public class Teste {
     public void alterarListaItens(@RequestBody Request request)
     {
         System.out.println("FUNÇÂO PUT "+request.getDbLista());
+        services.atualizaItensLista(request);
+
 
     }
 

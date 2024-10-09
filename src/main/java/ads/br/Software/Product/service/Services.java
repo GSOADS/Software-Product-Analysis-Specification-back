@@ -29,6 +29,7 @@ public class Services {
     private Response response = new Response();
     private DbNomeDaLista dbNomeDaLista = new DbNomeDaLista();
     private List<DbLista> dbListas;
+    private DbLista dbLista = new DbLista();
 
     public void create(Request request)
     {
@@ -86,6 +87,42 @@ public class Services {
         {
 
         }
+
+
+        return null;
+    }
+
+    public Response  atualizaItensLista(Request request)
+    {
+        for (int i = 0; i < request.getDbLista().size(); i++)
+        {
+            if(request.getDbLista().get(i).getItemLista().isEmpty()||request.getDbLista().get(i).getItemLista()==null)
+            {
+                long x = Long.parseLong(String.valueOf(request.getDbLista().get(i).getId()));
+                System.out.println("Item nulo ou vazio --> "+x);
+                dbListaRepository.deleteById(x);
+
+
+
+            }else
+            {
+                long x = Long.parseLong(String.valueOf(request.getDbLista().get(i).getId()));
+                System.out.println("Tem alguma coisa no item --> " +x);
+                dbLista = request.getDbLista().get(i);
+                dbListaRepository.save(dbLista);
+
+
+
+
+            }
+//
+//            request.getDbLista().get(i).setIdDbNomeLista(dbNomeDaLista.getId());
+//            request.getDbLista().get(i).setNomeDaSuaLista(dbNomeDaLista.getNomeDaSuaLista());
+//            System.out.println("o que tem dentro " + request.getDbLista().get(i));
+//            dbListaRepository.save(request.getDbLista().get(i));
+
+        }
+
 
 
         return null;
