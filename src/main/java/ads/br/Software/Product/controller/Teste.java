@@ -125,6 +125,17 @@ public class Teste {
 
     }
 
+    @DeleteMapping("/deletaListaEItens")
+    public ResponseEntity<String> deletaListaEItens(@RequestBody Request request)
+    {
+        System.out.println("FUNÇÂO Delete "+request.getDbLista());
+        services.deletaDbNomeDbLista(request);
+
+        return new ResponseEntity<>("Deletedado", HttpStatus.ACCEPTED);
+
+
+    }
+
     @GetMapping("/db")
     public ResponseEntity<String> verificarStatusDB() {
         try {

@@ -128,6 +128,26 @@ public class Services {
         return null;
     }
 
+    public void deletaDbNomeDbLista(Request request)
+    {
+        dbNomeDaLista = dbDonoDaListaRepository.findbynome(request.getDbNomeDaLista().getNomeDaSuaLista());
+        dbListas=dbListaRepository.findbynomeDaSuaLista(dbNomeDaLista.getNomeDaSuaLista());
+
+        for (int i = 0; i < dbListas.size(); i++)
+        {
+            long x = Long.parseLong(String.valueOf(request.getDbLista().get(i).getId()));
+            dbListaRepository.deleteById(Long.parseLong(String.valueOf(dbListas.get(i).getId())));
+
+        }
+
+        dbDonoDaListaRepository.deleteById(dbNomeDaLista.getId());
+
+
+
+
+
+    }
+
 
 
 
