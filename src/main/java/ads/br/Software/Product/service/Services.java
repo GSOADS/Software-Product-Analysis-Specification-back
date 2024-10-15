@@ -135,7 +135,7 @@ public class Services {
 
         for (int i = 0; i < dbListas.size(); i++)
         {
-            long x = Long.parseLong(String.valueOf(request.getDbLista().get(i).getId()));
+            long x = Long.parseLong(String.valueOf(getDbListas().get(i).getId()));
             dbListaRepository.deleteById(Long.parseLong(String.valueOf(dbListas.get(i).getId())));
 
         }

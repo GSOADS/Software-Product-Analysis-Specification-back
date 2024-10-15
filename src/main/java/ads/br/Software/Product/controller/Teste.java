@@ -107,7 +107,7 @@ public class Teste {
     @GetMapping("/obterListaEItens/{nomeDaLista}")
     public ResponseEntity <Response> obterListaEItens(@PathVariable String nomeDaLista)
     {
-        System.out.println("nome da lista"+ nomeDaLista);
+        System.out.println("nome da lista  "+ nomeDaLista);
 
         Response response = services.obterNomeELista(nomeDaLista);
         System.out.println(response);
@@ -128,7 +128,7 @@ public class Teste {
     @DeleteMapping("/deletaListaEItens")
     public ResponseEntity<String> deletaListaEItens(@RequestBody Request request)
     {
-        System.out.println("FUNÇÂO Delete "+request.getDbLista());
+        System.out.println("FUNÇÂO Delete "+request.getDbNomeDaLista().getNomeDaSuaLista());
         services.deletaDbNomeDbLista(request);
 
         return new ResponseEntity<>("Deletedado", HttpStatus.ACCEPTED);
